@@ -8,6 +8,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+app.use(express.static('public'));
+
 let smartAnswer;
 
 let jsonData;
@@ -37,7 +39,7 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+
 
 function findAnswer(query) {
     let lowerCaseQuery = query.toLowerCase();
@@ -66,3 +68,5 @@ function findAnswer(query) {
     // Fallback response
     return jsonData["fallback"].response;
 }
+
+server.listen(port, () => console.log(`Listening on port ${port}`));
